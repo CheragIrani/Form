@@ -1,21 +1,4 @@
-import { test, expect } from '@playwright/test';
-
-type MyFixture = {
-  navigate: any
-}
-const MyTest = test.extend<MyFixture>({
-  navigate: async({ page }, use) => {
-    await page.goto('https://demoqa.com/automation-practice-form', {waitUntil: "domcontentloaded"});
-    await expect(async () => {
-      await expect(await page.getByRole('heading', { name: 'Practice Form' })).toBeVisible();
-      await expect(await page.getByRole('heading', { name: 'Student Registration Form' })).toBeVisible();
-    }).toPass()
-    
-    await use(page)
-
-  }
-
-})
+import { MyTest } from '../page/setup';
 
 MyTest('Form can be submitted successfully', async ({ navigate }) => {
   await navigate.getByRole('textbox', { name: 'First Name' }).fill('first');
